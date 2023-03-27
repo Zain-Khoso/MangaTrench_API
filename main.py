@@ -1,10 +1,24 @@
 # main.py - The __main__ file of this API.
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from dbClient import Client
 
 # FastAPI & db_Client Instances.
 app, dbClient = FastAPI(), Client()
+
+# CORS Settings.
+origins = [
+    "http://localhost:5500",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
 
 # API Endpoints.
 
